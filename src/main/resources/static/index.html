@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//cdn.datatables.net/1.10.1/css/jquery.dataTables.css"/>
+  <link rel="stylesheet"
+        href="https://rawgithub.com/l-lin/angular-datatables/master/dist/plugins/bootstrap/datatables.bootstrap.min.css"/>
+  <link rel="stylesheet" type="text/css" href="./app/css/jasny-bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="./app/css/upload-file.css">
+  <link rel="stylesheet" href="https://unpkg.com/angular-toastr/dist/angular-toastr.css"/>
+</head>
+<body ng-app="fileUploader">
+
+<div class="container" ng-controller="FileUploaderController as vm">
+  <div>
+    <form name="fileUploadForm" data-ng-submit="addFile()">
+      <fieldset>
+        <legend>File uploader</legend>
+
+        <div class="fileinput fileinput-new" data-provides="fileinput">
+          <span class="btn btn-default btn-file"><span>Choose file</span>
+            <input type="file"
+                   onchange="angular.element(this).scope().uploadFile(this)"
+                   required/></span>
+          <span class="fileinput-filename"></span>
+          <span id="fileChosen" class="fileinput-new">
+            No File Chosen
+          </span>
+        </div>
+        <div class="description-div">
+          <label for="description">
+            Description:
+          </label>
+          <input id="description" type="text" ng-model="description" size="31" required>
+          <br>
+        </div>
+        <button type="submit" class="btn btn-primary">Upload</button>
+      </fieldset>
+    </form>
+  </div>
+  <br>
+  <button type="button" class="btn btn-primary" ng-click="getAllFiles()">Load Files</button>
+  <div ng-if="files.length">
+    <table datatable dt-options="dtOptions" class="table row-border hover">
+      <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Description
+        </th>
+        <th>
+          CreationDate
+        </th>
+        <th>
+          Download
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="file in files">
+        <td>
+          <div>
+            {{file.name}}
+          </div>
+        </td>
+        <td>
+          <div>
+            {{file.description}}
+          </div>
+        </td>
+        <td>
+          <div>
+            {{file.creationDate}}
+          </div>
+        </td>
+        <td>
+          <div>
+            <a target="_blank" href="http://localhost:8080/api/files/get/{{file.id}}">Download</a>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script data-require="jquery@1.10.1" data-semver="1.10.1"
+        src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="//cdn.datatables.net/1.10.1/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="./app/js/angular.min.js"></script>
+<script type="text/javascript"
+        src="https://rawgithub.com/l-lin/angular-datatables/master/dist/angular-datatables.min.js"></script>
+<script type="text/javascript"
+        src="https://rawgithub.com/l-lin/angular-datatables/dev/dist/plugins/bootstrap/angular-datatables.bootstrap.min.js"></script>
+
+<script type="text/javascript" src="./app/js/jasny-bootstrap.js"></script>
+<script src="https://unpkg.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
+<script src="//code.angularjs.org/1.5.8/angular-animate.js"></script>
+<script type="text/javascript" src="./app/app.js"></script>
+<script type="text/javascript" src="./app/services.js"></script>
+<script type="text/javascript" src="./app/controllers.js"></script>
+
+
+</body>
+</html>
