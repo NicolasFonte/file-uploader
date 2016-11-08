@@ -26,4 +26,11 @@ file details and download the file.
 - Click Load whenever want to check loaded files.
 - In the list you can check details and Download the file.
 
+## Future work
+- Fixes UI bugs that eventually show up get ideas in how to make a better layout.
+- Add proper UI infrastructure with sass, gulp, bower and routing..
+- Unit test for exception cases
+- Serializer for domain classes since blob is not being returned to frontend as is
+- Add a upload progress tab
+- change hardcoded urls to apis.
 
